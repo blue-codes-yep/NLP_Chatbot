@@ -1,15 +1,25 @@
 {% extends 'base.html'%}
-
+{% load static %}
 
 {% block content %}
     <h2>Blue's Chatbot</h2>
     <div>
         <div id="chatbox">
             <p class="botText"><span>Hi! Let's get to chatting.</span></p>
+            <p class="userText"><span>{{context}}</span></p>
         </div>
         <div id="userInput">
-            <input id="textInput" type="text" name="msg" placeholder="Message">
+        <form type="text" id="textInput" action="" method="POST" novalidate>
+            {% csrf_token %}
+            {{ form }}
             <input id="buttonInput" type="submit" value="Send">
+            </form>
         </div>
+    </div>
+    <script type="text/javascript">
+        $(document).on('submit', '#post-form', function(e){
+            e.preventDefault();
+        })
 
+    </script>
 {% endblock %}
